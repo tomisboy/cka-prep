@@ -22,10 +22,21 @@ ETCDCTL_API=3 etcdctl --endpoints 127.0.0.1:2379 \
 snapshot restore \
 --data-dir /var/lib/etcd-from-backup \
 /opt/snapshot-pre-boot.db
+```
 
-
+## edit ETCD Config to Use new Folder /var/lib/etcd-from-backup
+```
+vi /etc/kubernetes/manifests/etcd.yaml 
+ volumes:
+  - hostPath:
+      path: /etc/kubernetes/pki/etcd
+      type: DirectoryOrCreate
+    name: etcd-certs
+  - hostPath:
+      path: /var/lib/etcd-from-backup  # < change this to new location where snapshot is restored
+      type: DirectoryOrCreate
+    name: etcd-data
 
 ```
 
-
-ETCDCTL_API=3 etcdctl snapshot restore --data-dir
+https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/

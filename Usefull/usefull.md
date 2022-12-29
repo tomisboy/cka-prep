@@ -42,4 +42,17 @@ or<br>
 
 
 ## fast delete
-kubectl delete pods <pod> --grace-period=0 --force
+`kubectl delete pods <pod> --grace-period=0 --force`
+
+
+## get current context 
+``kubectl config current-context``
+
+## switch context
+``kubectl config use-context cluster2``
+
+## switch context when using different kubeconfigfile
+``kubectl config --kubeconfig=/root/my-kube-config use-context research``
+
+## get shortcuts and api ressources 
+` k api-resources `

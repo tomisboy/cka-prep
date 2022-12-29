@@ -1,0 +1,26 @@
+## What is the Common Name (CN) configured on the Kube API Server Certificate?
+`openssl x509 -in /etc/kubernetes/pki/apiserver.crt -text -noout`
+
+## What is the Common Name (CN) configured on the ETCD Server certificate?
+`openssl x509 -in /etc/kubernetes/pki/etcd/server.crt -text -noout`
+
+## Create a CertificateSigningRequest object with the name akshay with the contents of the akshay.csr file
+
+```
+cat akshay.csr | base64 | tr -d '\n'
+
+apiVersion: certificates.k8s.io/v1
+kind: CertificateSigningRequest
+metadata:
+  name: akshay
+spec:
+  request: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURSBSRVFVRVNULS0tLS0KTUlJQ1ZqQ0NBVDRDQVFBd0VURVBNQTBHQTFVRUF3d0dZV3R6YUdGNU1JSUJJakFOQmdrcWhraUc5dzBCQVFFRgpBQU9DQVE4QU1JSUJDZ0tDQVFFQXJOcnlrUDIyQTF0cTQvVENJQjRLUnZWSkthT0lrVjEzRzg2OXBjM2paOFM1Ci9jeERCQXVPNHFaOFBnVDNxaEpsSDdESWtmdE5sY2VBUHZpT3lFQUNEQjNERWRXcUszWG14bFgxTkdoNnRVbW8KSEdwakhkSWxBTzgxQ3JvUXp5K05qNG0zL1ZsSjV1akZkSGJrTlp5SGVndC9xMHF0OGl2ak4vSmZkbk1maHF1Two3OExpa0RzZXgxWWpnNnhHRWNtRUc5NWFmcy92V3BmNlZ2NTNkMnhlWldRai8vUm9BbzVlT1diZzZYRFBXTjVaClpKWTdsa0praDYwK2I4Y1ZHWXF4VkxNc2QyWlUyTGRaS1JjSGlLV2tnWWlmSWVqSmM2WHhyMFdFcXVxY0ZPZDgKYVJNWDdacUptNnpvRHA5dW9Ob1B1ejVJbXcrOFBZaHFJQW5PTXJVc1pRSURBUUFCb0FBd0RRWUpLb1pJaHZjTgpBUUVMQlFBRGdnRUJBQkNmdWJpUHA0d0lKTjgvdkZQUjA0V01CUDFJUHNiN3BwaVBDaTdQam1tcUJyY0tacEMxCkd6Si85M2xhaTZRaHZtb25xNXp5M1B6L21sL0FoVmJjaEZaa05UVUhFUzlIeGZEbC9xSy8wa240Rmx3SUFGMjkKNWw5aHNzckl6Nmt0aDdLY0tmYW13L3hMZG5xbHcwZjF6UEt4NC8wWDZ5QTN4akpmZXZUaHd2eWVBNzlkSGNnZwoxTDV2ODJ0aitPYVJvNUhlckFodVN0OUFwdi9VbXo5dGxYT1Q2bXRmNncvSWNaV1RQU2JERmJFR3FMaWNVaWxQCmdaWWVPQXk4OHFQL2h5MWRZRjVncjJGSG1sQ2hnWHdoYStFSWZGOVNqU1FiRFBuV2JELzJFNXFxMFZTdTl6OS8KUmZuNHpsc3ZLS25NeFpqKzlrNllHU2N2MkJiT1Q2cE9oaUE9Ci0tLS0tRU5EIENFUlRJRklDQVRFIFJFUVVFU1QtLS0tLQo=
+  signerName: kubernetes.io/kube-apiserver-client
+  usages:
+  - client auth
+
+
+Approve:
+kubectl certificate approve akshay
+```
+
