@@ -39,3 +39,7 @@ or<br>
 or<br>
 ``kubectl create service nodeport nginx --tcp=80:80 --node-port=30080 --dry-run=client -o yaml`` 
 (This will not use the pods labels as selectors)
+
+
+## fast delete
+kubectl delete pods <pod> --grace-period=0 --force
