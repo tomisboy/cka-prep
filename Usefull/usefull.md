@@ -56,3 +56,10 @@ or<br>
 
 ## get shortcuts and api ressources 
 ` k api-resources `
+
+
+## link to install cni
+https://v1-22.docs.kubernetes.io/docs/setup/production-environment/tools/kubeadm/high-availability/#set-up-the-first-control-plane-node
+
+## place pod on node x
+nodeName : nodeX
